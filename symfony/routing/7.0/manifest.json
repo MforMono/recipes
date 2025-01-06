@@ -1,0 +1,12 @@
+{
+  "copy-from-recipe": {
+    "config/": "%CONFIG_DIR%/"
+  },
+  "aliases": ["router"],
+  "conflict": {
+    "symfony/framework-bundle": "<7.0"
+  },
+  "env": {
+    "APP_DEFAULT_URI": "http://localhost"
+  }
+}
