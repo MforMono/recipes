@@ -1,0 +1,34 @@
+{
+    "aliases": {
+        "framework-bundle": "symfony/framework-bundle",
+        "frameworkbundle": "symfony/framework-bundle",
+        "router": "symfony/routing",
+        "routing": "symfony/routing"
+    },
+    "recipes": {
+        "symfony/framework-bundle": [
+            "7.2"
+        ],
+        "symfony/routing": [
+            "7.0"
+        ]
+    },
+    "recipe-conflicts": {
+        "symfony/routing": {
+            "7.0": {
+                "symfony/framework-bundle": "<7.0"
+            }
+        }
+    },
+    "versions": [],
+    "branch": "main",
+    "is_contrib": true,
+    "_links": {
+        "repository": "github.com/MforMono/recipes",
+        "origin_template": "{package}:{version}@github.com/MforMono/recipes:main",
+        "recipe_template": "https://raw.githubusercontent.com/MforMono/recipes/flex/main/{package_dotted}.{version}.json",
+        "recipe_template_relative": "{package_dotted}.{version}.json",
+        "archived_recipes_template": "https://raw.githubusercontent.com/MforMono/recipes/flex/main/archived/{package_dotted}/{ref}.json",
+        "archived_recipes_template_relative": "archived/{package_dotted}/{ref}.json"
+    }
+}

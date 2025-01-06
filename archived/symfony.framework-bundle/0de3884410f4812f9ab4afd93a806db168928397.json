@@ -1,0 +1,257 @@
+{
+    "manifests": {
+        "symfony/framework-bundle": {
+            "manifest": {
+                "bundles": {
+                    "Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/",
+                    "public/": "%PUBLIC_DIR%/",
+                    "src/": "%SRC_DIR%/"
+                },
+                "composer-scripts": {
+                    "cache:clear": "symfony-cmd",
+                    "assets:install %PUBLIC_DIR%": "symfony-cmd"
+                },
+                "env": {
+                    "APP_ENV": "dev",
+                    "APP_SECRET": ""
+                },
+                "dotenv": {
+                    "dev": {
+                        "APP_SECRET": "%generate(secret)%"
+                    }
+                },
+                "gitignore": [
+                    "/.env.local",
+                    "/.env.local.php",
+                    "/.env.*.local",
+                    "/%CONFIG_DIR%/secrets/prod/prod.decrypt.private.php",
+                    "/%PUBLIC_DIR%/bundles/",
+                    "/%VAR_DIR%/",
+                    "/vendor/"
+                ],
+                "post-install-output": [
+                    "  * <fg=blue>Run</> your application:",
+                    "    1. Go to the project directory",
+                    "    2. Create your code repository with the <comment>git init</comment> command",
+                    "    3. Download the Symfony CLI at <comment>https://symfony.com/download</> to install a development web server",
+                    "",
+                    "  * <fg=blue>Read</> the documentation at <comment>https://symfony.com/doc</>"
+                ]
+            },
+            "files": {
+                "config/packages/cache.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;\r",
+                        "\r",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {\r",
+                        "    $containerConfigurator->extension('framework', [\r",
+                        "        'cache' => null,\r",
+                        "    ]);\r",
+                        "};\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/packages/framework.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('framework', [",
+                        "        'secret' => '%env(APP_SECRET)%',",
+                        "        'session' => true,",
+                        "    ]);",
+                        "",
+                        "    if ('test' === $containerConfigurator->env()) {",
+                        "        $containerConfigurator->extension('framework', [",
+                        "            'test' => true,",
+                        "            'session' => [",
+                        "                'storage_factory_id' => 'session.storage.factory.mock_file',",
+                        "            ],",
+                        "        ]);",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/preload.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "if (file_exists(dirname(__DIR__).'/var/cache/prod/App_KernelProdContainer.preload.php')) {\r",
+                        "    require dirname(__DIR__).'/var/cache/prod/App_KernelProdContainer.preload.php';\r",
+                        "}\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/routes/framework.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator;",
+                        "",
+                        "return static function (RoutingConfigurator $routingConfigurator): void {",
+                        "    if ('dev' === $routingConfigurator->env()) {",
+                        "        $routingConfigurator->import('@FrameworkBundle/Resources/config/routing/errors.xml')",
+                        "            ->prefix('/_error')",
+                        "        ;",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/services.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "use App\\Shared\\Infrastructure\\Mailer\\SymfonyMailer;\r",
+                        "use App\\Shared\\UI\\Twig\\AdvisorExtension;\r",
+                        "use App\\Shared\\UI\\Twig\\GoogleTagManagerExtension;\r",
+                        "use App\\Tests\\Mock\\Http\\Response\\MockResponse;\r",
+                        "use AsyncAws\\S3\\S3Client;\r",
+                        "use Sylius\\Bundle\\ResourceBundle\\Form\\Type\\AbstractResourceType;\r",
+                        "use Sylius\\Resource\\Symfony\\ExpressionLanguage\\RequestVariables;\r",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;\r",
+                        "use Symfony\\Component\\Notifier\\FlashMessage\\BootstrapFlashMessageImportanceMapper;\r",
+                        "use Twig\\Extra\\Intl\\IntlExtension;\r",
+                        "use Twig\\Extra\\Html\\HtmlExtension;\r",
+                        "use function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\env;\r",
+                        "use function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service;\r",
+                        "\r",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {\r",
+                        "    $services = $containerConfigurator->services();\r",
+                        "\r",
+                        "    # default configuration for services in *this* file\r",
+                        "    $services->defaults()\r",
+                        "        ->autowire()\r",
+                        "        ->autoconfigure()\r",
+                        "    ;\r",
+                        "\r",
+                        "    # makes classes in src/ available to be used as services\r",
+                        "    # this creates a service per class whose id is the fully-qualified class name\r",
+                        "    $services\r",
+                        "        ->load('App\\\\', __DIR__.'/../src/')\r",
+                        "        ->exclude([\r",
+                        "            __DIR__.'/../src/DependencyInjection',\r",
+                        "            __DIR__.'/../src/Entity',\r",
+                        "            __DIR__.'/../src/Kernel.php',\r",
+                        "        ])\r",
+                        "    ;\r",
+                        "\r",
+                        "    # add more service definitions when explicit configuration is needed\r",
+                        "    # please note that last definitions always *replace* previous ones\r",
+                        "    $containerConfigurator->import('services/');\r",
+                        "};\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/services/.gitignore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                },
+                "public/index.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "use App\\Kernel;\r",
+                        "\r",
+                        "require_once dirname(__DIR__).'/vendor/autoload_runtime.php';\r",
+                        "\r",
+                        "return function (array $context) {\r",
+                        "    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);\r",
+                        "};\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "src/Kernel.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "namespace App;\r",
+                        "\r",
+                        "use Symfony\\Bundle\\FrameworkBundle\\Kernel\\MicroKernelTrait;\r",
+                        "use Symfony\\Component\\Config\\Loader\\LoaderInterface;\r",
+                        "use Symfony\\Component\\DependencyInjection\\ContainerBuilder;\r",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;\r",
+                        "use Symfony\\Component\\HttpKernel\\Kernel as BaseKernel;\r",
+                        "use Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator;\r",
+                        "\r",
+                        "class Kernel extends BaseKernel\r",
+                        "{\r",
+                        "    use MicroKernelTrait;\r",
+                        "\r",
+                        "    protected function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void\r",
+                        "    {\r",
+                        "        $configDir = $this->getConfigDir();\r",
+                        "\r",
+                        "        $container->import($configDir . '/{packages}/*.{php,yaml}');\r",
+                        "        $container->import($configDir . '/{packages}/' . $this->environment . '/*.{php,yaml}');\r",
+                        "\r",
+                        "        if (is_file($configDir . '/services.php')) {\r",
+                        "            $container->import($configDir . '/services.php');\r",
+                        "            $container->import($configDir . '/{services}_' . $this->environment . '.php');\r",
+                        "        } else {\r",
+                        "            $container->import($configDir . '/{services}.yaml');\r",
+                        "        }\r",
+                        "    }\r",
+                        "\r",
+                        "    protected function configureRoutes(RoutingConfigurator $routes): void\r",
+                        "    {\r",
+                        "        $configDir = $this->getConfigDir();\r",
+                        "\r",
+                        "        $routes->import($configDir . '/{routes}/' . $this->environment . '/*.{php,yaml}');\r",
+                        "        $routes->import($configDir . '/{routes}/*.{php,yaml}');\r",
+                        "\r",
+                        "        if (is_file($configDir . '/routes.php')) {\r",
+                        "            $routes->import($configDir . '/routes.php');\r",
+                        "        } else {\r",
+                        "            $routes->import($configDir . '/{routes}.yaml');\r",
+                        "        }\r",
+                        "\r",
+                        "        $fileName = (new \\ReflectionObject($this))->getFileName();\r",
+                        "        if (false !== $fileName) {\r",
+                        "            $routes->import($fileName, 'attribute');\r",
+                        "        }\r",
+                        "    }\r",
+                        "}\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "src/UI/Controller/.gitignore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "0de3884410f4812f9ab4afd93a806db168928397"
+        }
+    }
+}
