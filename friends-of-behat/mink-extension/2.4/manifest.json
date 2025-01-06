@@ -1,0 +1,23 @@
+{
+    "add-lines": [
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "    ->withExtension(new Extension(Behat\\MinkExtension\\ServiceContainer\\MinkExtension::class, [",
+                "        'files_path' => '%paths.base%/tests/Resources/',",
+                "        'base_url' => 'https://127.0.0.1:8080',",
+                "        'default_session' => 'symfony',",
+                "        'sessions' => [",
+                "            # Sessions",
+                "            'symfony' => [",
+                "                'symfony' => null,",
+                "            ],",
+                "        ],",
+                "    ]))"
+            ],
+            "position": "after_target",
+            "target": "# Extensions",
+            "warn_if_missing": true
+        }
+    ]
+}

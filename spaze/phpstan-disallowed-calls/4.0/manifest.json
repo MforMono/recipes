@@ -1,0 +1,11 @@
+{
+    "add-lines": [
+        {
+            "file": "phpstan.neon",
+            "content": "\n    - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon\n    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon",
+            "position": "after_target",
+            "target": "includes:",
+            "warn_if_missing": true
+        }
+    ]
+}

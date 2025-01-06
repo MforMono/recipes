@@ -1,0 +1,11 @@
+{
+    "add-lines": [
+        {
+            "file": "phpunit.xml.dist",
+            "content": "        <bootstrap class=\"DG\\BypassFinals\\PHPUnitExtension\"/>",
+            "position": "after_target",
+            "target": "<extensions>",
+            "warn_if_missing": true
+        }
+    ]
+}

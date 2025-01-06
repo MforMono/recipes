@@ -1,0 +1,17 @@
+{
+    "add-lines": [
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "    ->withExtension(new Extension(FriendsOfBehat\\MinkDebugExtension\\ServiceContainer\\MinkDebugExtension::class, [",
+                "        'directory' => 'etc/build',",
+                "        'clean_start' => true,",
+                "        'screenshot' => true,",
+                "    ]))"
+            ],
+            "position": "after_target",
+            "target": "# Extensions",
+            "warn_if_missing": true
+        }
+    ]
+}

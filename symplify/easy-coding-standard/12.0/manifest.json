@@ -1,0 +1,8 @@
+{
+    "copy-from-recipe": {
+        "ecs.php": "ecs.php"
+    },
+    "gitignore": [
+        "/.ecs_cache"
+    ]
+}

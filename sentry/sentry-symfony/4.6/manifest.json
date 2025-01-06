@@ -1,0 +1,16 @@
+{
+    "bundles": {
+        "Sentry\\SentryBundle\\SentryBundle": ["prod"]
+    },
+    "copy-from-recipe": {
+        "config/": "%CONFIG_DIR%/"
+    },
+    "env": {
+        "SENTRY_DSN": "",
+        "APP_RUNTIME_ENV": "prod"
+    },
+    "conflict": {
+        "symfony/framework-bundle": "<5.4",
+        "symfony/monolog-bundle": "<3.7"
+    }
+}

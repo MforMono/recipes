@@ -1,0 +1,13 @@
+{
+    "add-lines": [
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "    ->withExtension(new Extension(FriendsOfBehat\\VariadicExtension\\ServiceContainer\\VariadicExtension::class))"
+            ],
+            "position": "after_target",
+            "target": "# Extensions",
+            "warn_if_missing": true
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "add-lines": [
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "    ->withExtension(new Extension(Robertfausk\\Behat\\PantherExtension\\ServiceContainer\\PantherExtension::class))"
+            ],
+            "position": "after_target",
+            "target": "# Extensions",
+            "warn_if_missing": true
+        },
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "        'javascript_session' => 'panther',"
+            ],
+            "position": "after_target",
+            "target": "'default_session' => 'symfony',",
+            "warn_if_missing": true
+        },
+        {
+            "file": "behat.dist.php",
+            "content": [
+                "            'panther' => [",
+                "                'panther' => [",
+                "                    'options' => [",
+                "                        'browser' => 'chrome',",
+                "                        'webServerDir' => '%paths.base%/public',",
+                "                        'external_base_uri' => 'https://127.0.0.1:8080',",
+                "                    ],",
+                "                    'kernel_options' => [",
+                "                        'APP_ENV' => 'test',",
+                "                        'APP_DEBUG' => false,",
+                "                    ],",
+                "                    'manager_options' => [",
+                "                        'connection_timeout_in_ms' => 5000,",
+                "                        'request_timeout_in_ms' => 120000,",
+                "                        'capabilities' => [",
+                "                            'browserName' => 'chrome',",
+                "                            'browser' => 'chrome',",
+                "                            'acceptSslCerts' => true,",
+                "                            'acceptInsecureCerts' => true,",
+                "                            'unexpectedAlertBehaviour' => 'accept',",
+                "                        ],",
+                "                        'extra_capabilities' => [",
+                "                            'chromeOptions' => [",
+                "                                'args' => ['",
+                "                                    '--window-size=2880,1800',",
+                "                                    '--headless',",
+                "                                    'start-fullscreen',",
+                "                                    'start-maximized',",
+                "                                    'no-sandbox',",
+                "                                ],",
+                "                            ],",
+                "                        ],",
+                "                    ],",
+                "                ],",
+                "            ],"
+            ],
+            "position": "after_target",
+            "target": "# Sessions",
+            "warn_if_missing": true
+        }
+    ]
+}

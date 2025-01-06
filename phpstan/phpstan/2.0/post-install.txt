@@ -1,0 +1,5 @@
+  * You're ready to use phpstan. Package suggestions:
+    - phpstan/extension-installer
+    - phpstan/phpstan-doctrine
+    - phpstan/phpstan-symfony
+    - phpstan/phpstan-webmozart-assert
