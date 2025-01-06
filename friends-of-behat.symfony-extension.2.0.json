@@ -1,0 +1,189 @@
+{
+    "manifests": {
+        "friends-of-behat/symfony-extension": {
+            "manifest": {
+                "bundles": {
+                    "FriendsOfBehat\\SymfonyExtension\\Bundle\\FriendsOfBehatSymfonyExtensionBundle": [
+                        "test"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "behat.dist.php": "behat.dist.php",
+                    "config/": "%CONFIG_DIR%/",
+                    "features/": "features/",
+                    "tests/": "tests/"
+                },
+                "gitignore": [
+                    "/behat.php"
+                ]
+            },
+            "files": {
+                "behat.dist.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Behat\\Config\\Config;",
+                        "use Behat\\Config\\Extension;",
+                        "use Behat\\Config\\Filter\\TagFilter;",
+                        "use Behat\\Config\\Formatter\\PrettyFormatter;",
+                        "use Behat\\Config\\Profile;",
+                        "use Behat\\MinkExtension\\ServiceContainer\\MinkExtension;",
+                        "use Behat\\Testwork\\Output\\Printer\\Factory\\OutputFactory;",
+                        "use FriendsOfBehat\\SymfonyExtension\\ServiceContainer\\SymfonyExtension;",
+                        "",
+                        "$profile = (new Profile('default'))",
+                        "    ->withFormatter(",
+                        "        (new PrettyFormatter(paths: false))",
+                        "            ->withOutputVerbosity(OutputFactory::VERBOSITY_VERBOSE)",
+                        "    )",
+                        "    ->withFilter(new TagFilter('~@todo'))",
+                        "",
+                        "    # Extensions",
+                        "    ->withExtension(new Extension(SymfonyExtension::class, [",
+                        "        'bootstrap' => 'tests/bootstrap.php',",
+                        "    ]))",
+                        ";",
+                        "",
+                        "return (new Config())",
+                        "    ->import('config/behat/suites.php')",
+                        "    ->withProfile($profile)",
+                        ";",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/behat/suites.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "use Behat\\Config\\Config;\r",
+                        "\r",
+                        "return (new Config())\r",
+                        "    ->import([\r",
+                        "\r",
+                        "    ])\r",
+                        ";\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/behat/suites/.gitiginore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/services_test.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use App\\Tests\\Mock\\HttpFoundation\\MockRequestStack;",
+                        "use App\\Tests\\Behat\\Client\\ApiPlatformClient;",
+                        "use App\\Tests\\Behat\\Client\\RequestFactory;",
+                        "use Behat\\Behat\\Context\\Context;",
+                        "use FriendsOfBehat\\PageObjectExtension\\Page\\SymfonyPageInterface;",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "use Symfony\\Component\\HttpFoundation\\Session\\SessionFactoryInterface;",
+                        "",
+                        "use function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->parameters()",
+                        "        ->set('locale', 'en_US')",
+                        "    ;",
+                        "",
+                        "    $services = $containerConfigurator->services()",
+                        "        ->defaults()",
+                        "        ->autowire()",
+                        "        ->autoconfigure()",
+                        "    ;",
+                        "",
+                        "    $services->load('App\\\\Tests\\\\Behat\\\\', __DIR__.'/../tests/Behat/');",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "features/demo.feature": {
+                    "contents": [
+                        "# This file contains a user story for demonstration only.\r",
+                        "# Learn how to get started with Behat and BDD on Behat's website:\r",
+                        "# http://behat.org/en/latest/quick_start.html\r",
+                        "\r",
+                        "Feature:\r",
+                        "  In order to prove that the Behat Symfony extension is correctly installed\r",
+                        "  As a user\r",
+                        "  I want to have a demo scenario\r",
+                        "\r",
+                        "  Scenario: It receives a response from Symfony's kernel\r",
+                        "    When a demo scenario sends a request to \"/\"\r",
+                        "    Then the response should be received\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "tests/Behat/DemoContext.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "namespace App\\Tests\\Behat;\r",
+                        "\r",
+                        "use Behat\\Behat\\Context\\Context;\r",
+                        "use Symfony\\Component\\HttpFoundation\\Request;\r",
+                        "use Symfony\\Component\\HttpFoundation\\Response;\r",
+                        "use Symfony\\Component\\HttpKernel\\KernelInterface;\r",
+                        "\r",
+                        "/**\r",
+                        " * This context class contains the definitions of the steps used by the demo\r",
+                        " * feature file. Learn how to get started with Behat and BDD on Behat's website.\r",
+                        " *\r",
+                        " * @see http://behat.org/en/latest/quick_start.html\r",
+                        " */\r",
+                        "final class DemoContext implements Context\r",
+                        "{\r",
+                        "    /** @var KernelInterface */\r",
+                        "    private $kernel;\r",
+                        "\r",
+                        "    /** @var Response|null */\r",
+                        "    private $response;\r",
+                        "\r",
+                        "    public function __construct(KernelInterface $kernel)\r",
+                        "    {\r",
+                        "        $this->kernel = $kernel;\r",
+                        "    }\r",
+                        "\r",
+                        "    /**\r",
+                        "     * @When a demo scenario sends a request to :path\r",
+                        "     */\r",
+                        "    public function aDemoScenarioSendsARequestTo(string $path): void\r",
+                        "    {\r",
+                        "        $this->response = $this->kernel->handle(Request::create($path, 'GET'));\r",
+                        "    }\r",
+                        "\r",
+                        "    /**\r",
+                        "     * @Then the response should be received\r",
+                        "     */\r",
+                        "    public function theResponseShouldBeReceived(): void\r",
+                        "    {\r",
+                        "        if ($this->response === null) {\r",
+                        "            throw new \\RuntimeException('No response received');\r",
+                        "        }\r",
+                        "    }\r",
+                        "}\r",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "ed96ca1afa3b9ffc25c5d0d2a64754cb5c85d33f"
+        }
+    }
+}

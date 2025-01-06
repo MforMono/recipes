@@ -1,0 +1,25 @@
+{
+    "manifests": {
+        "friends-of-behat/mink-debug-extension": {
+            "manifest": {
+                "add-lines": [
+                    {
+                        "file": "behat.dist.php",
+                        "content": [
+                            "    ->withExtension(new Extension(FriendsOfBehat\\MinkDebugExtension\\ServiceContainer\\MinkDebugExtension::class, [",
+                            "        'directory' => 'etc/build',",
+                            "        'clean_start' => true,",
+                            "        'screenshot' => true,",
+                            "    ]))"
+                        ],
+                        "position": "after_target",
+                        "target": "# Extensions",
+                        "warn_if_missing": true
+                    }
+                ]
+            },
+            "files": [],
+            "ref": "eec63fb3c1a9d051b94770a001b813476b408777"
+        }
+    }
+}

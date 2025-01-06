@@ -1,0 +1,81 @@
+{
+    "manifests": {
+        "sentry/sentry-symfony": {
+            "manifest": {
+                "bundles": {
+                    "Sentry\\SentryBundle\\SentryBundle": [
+                        "prod"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                },
+                "env": {
+                    "SENTRY_DSN": "",
+                    "APP_RUNTIME_ENV": "prod"
+                },
+                "conflict": {
+                    "symfony/framework-bundle": "<5.4",
+                    "symfony/monolog-bundle": "<3.7"
+                }
+            },
+            "files": {
+                "config/packages/sentry.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Monolog\\Processor\\PsrLogMessageProcessor;",
+                        "use Sentry\\Exception\\FatalErrorException;",
+                        "use Sentry\\State\\HubInterface;",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "use Symfony\\Component\\ErrorHandler\\Error\\FatalError;",
+                        "use Symfony\\Component\\HttpKernel\\Exception\\GoneHttpException;",
+                        "use Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    if ('prod' === $containerConfigurator->env()) {",
+                        "        $containerConfigurator->extension('sentry', [",
+                        "            'dsn' => '%env(SENTRY_DSN)%',",
+                        "            'register_error_listener' => false,",
+                        "            'register_error_handler' => false,",
+                        "            'options' => [",
+                        "                'environment' => '%env(APP_RUNTIME_ENV)%',",
+                        "                'ignore_exceptions' => [",
+                        "                    FatalError::class,",
+                        "                    FatalErrorException::class,",
+                        "                    NotFoundHttpException::class,",
+                        "                    GoneHttpException::class,",
+                        "                ]",
+                        "            ]",
+                        "        ]);",
+                        "",
+                        "        $containerConfigurator->extension('monolog', [",
+                        "            'handlers' => [",
+                        "                'sentry' => [",
+                        "                    'type' => 'sentry',",
+                        "                    'level' => Monolog\\Level::Error->value,",
+                        "                    'hub_id' => HubInterface::class,",
+                        "                    'fill_extra_context' => true,",
+                        "                ],",
+                        "            ],",
+                        "        ]);",
+                        "",
+                        "        $services = $containerConfigurator->services();",
+                        "",
+                        "        $services",
+                        "            ->set(PsrLogMessageProcessor::class)",
+                        "            ->tag('monolog.processor', ['handler' => 'sentry']);",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "59f48ebda04d055d67eb8226bd046b329fa58e0e"
+        }
+    }
+}

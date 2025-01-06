@@ -1,0 +1,22 @@
+{
+    "manifests": {
+        "spaze/phpstan-disallowed-calls": {
+            "manifest": {
+                "add-lines": [
+                    {
+                        "file": "phpstan.neon",
+                        "content": [
+                            "    - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon",
+                            "    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon"
+                        ],
+                        "position": "after_target",
+                        "target": "includes:",
+                        "warn_if_missing": true
+                    }
+                ]
+            },
+            "files": [],
+            "ref": "0bad086fdceb86a19a34f53db428417e331d6657"
+        }
+    }
+}

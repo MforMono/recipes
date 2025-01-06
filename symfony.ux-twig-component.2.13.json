@@ -1,21 +1,18 @@
 {
     "manifests": {
-        "symfony/debug-bundle": {
+        "symfony/ux-twig-component": {
             "manifest": {
                 "bundles": {
-                    "Symfony\\Bundle\\DebugBundle\\DebugBundle": [
-                        "dev"
+                    "Symfony\\UX\\TwigComponent\\TwigComponentBundle": [
+                        "all"
                     ]
                 },
                 "copy-from-recipe": {
                     "config/": "%CONFIG_DIR%/"
-                },
-                "conflict": {
-                    "symfony/framework-bundle": "<5.3"
                 }
             },
             "files": {
-                "config/packages/debug.php": {
+                "config/packages/twig_component.php": {
                     "contents": [
                         "<?php",
                         "",
@@ -24,18 +21,19 @@
                         "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
                         "",
                         "return static function (ContainerConfigurator $containerConfigurator): void {",
-                        "    if ('dev' === $containerConfigurator->env()) {",
-                        "        $containerConfigurator->extension('debug', [",
-                        "            'dump_destination' => 'tcp://%env(VAR_DUMPER_SERVER)%',",
-                        "        ]);",
-                        "    }",
+                        "    $containerConfigurator->extension('twig_component', [",
+                        "        'anonymous_template_directory' => 'components/',",
+                        "        'defaults' => [",
+                        "            'App\\\\Shared\\\\UI\\\\Twig\\\\Components\\\\' => 'components/',",
+                        "        ],",
+                        "    ]);",
                         "};",
                         ""
                     ],
                     "executable": false
                 }
             },
-            "ref": "ab31adaf68a4ca980436c79a1d54d8e418da07e3"
+            "ref": "d562cf7b1985ddcfe43bec369b0a0255d3e76b6f"
         }
     }
 }

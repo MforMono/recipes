@@ -1,0 +1,19 @@
+{
+    "manifests": {
+        "dg/bypass-finals": {
+            "manifest": {
+                "add-lines": [
+                    {
+                        "file": "phpunit.xml.dist",
+                        "content": "        <bootstrap class=\"DG\\BypassFinals\\PHPUnitExtension\"/>",
+                        "position": "after_target",
+                        "target": "<extensions>",
+                        "warn_if_missing": true
+                    }
+                ]
+            },
+            "files": [],
+            "ref": "10d9cd67fe9599ba2fa2283d9ad734744fd161a0"
+        }
+    }
+}

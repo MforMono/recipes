@@ -1,0 +1,21 @@
+{
+    "manifests": {
+        "friends-of-behat/variadic-extension": {
+            "manifest": {
+                "add-lines": [
+                    {
+                        "file": "behat.dist.php",
+                        "content": [
+                            "    ->withExtension(new Extension(FriendsOfBehat\\VariadicExtension\\ServiceContainer\\VariadicExtension::class))"
+                        ],
+                        "position": "after_target",
+                        "target": "# Extensions",
+                        "warn_if_missing": true
+                    }
+                ]
+            },
+            "files": [],
+            "ref": "a040161f4caf718fda027a086393f3a7d7a60b3e"
+        }
+    }
+}
