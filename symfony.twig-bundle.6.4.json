@@ -1,0 +1,80 @@
+{
+    "manifests": {
+        "symfony/twig-bundle": {
+            "manifest": {
+                "bundles": {
+                    "Symfony\\Bundle\\TwigBundle\\TwigBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/",
+                    "templates/": "templates/"
+                },
+                "conflict": {
+                    "symfony/framework-bundle": "<5.3"
+                }
+            },
+            "files": {
+                "config/packages/twig.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use App\\Shared\\Application\\Context\\MonarkContext;",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "use function Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('twig', [",
+                        "        'twig' => [",
+                        "            'file_name_pattern' => '*.twig',",
+                        "        ],",
+                        "    ]);",
+                        "",
+                        "    if ('test' === $containerConfigurator->env()) {",
+                        "        $containerConfigurator->extension('twig', [",
+                        "            'strict_variables' => true,",
+                        "        ]);",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "templates/base.html.twig": {
+                    "contents": [
+                        "<!DOCTYPE html>\r",
+                        "<html lang=\"{{ app.request.locale|slice(0, 2) }}\">\r",
+                        "<head>\r",
+                        "    <meta charset=\"utf-8\">\r",
+                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r",
+                        "\r",
+                        "    <title>{% block title %}Welcome!{% endblock %}</title>\r",
+                        "\r",
+                        "    <meta content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\" name=\"viewport\">\r",
+                        "    {% block metatags %}{% endblock %}\r",
+                        "\r",
+                        "    <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>\u26ab\ufe0f</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">\r",
+                        "    {% block stylesheets %}\r",
+                        "    {% endblock %}\r",
+                        "</head>\r",
+                        "\r",
+                        "<body>\r",
+                        "    {% block body %}{% endblock %}\r",
+                        "\r",
+                        "    {% block javascripts %}{% endblock %}\r",
+                        "</body>\r",
+                        "\r",
+                        "</html>\r",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "7fcd11d7a945b74d97c383d2b668103a3eae5b8b"
+        }
+    }
+}

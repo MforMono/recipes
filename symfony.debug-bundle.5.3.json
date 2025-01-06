@@ -1,0 +1,41 @@
+{
+    "manifests": {
+        "symfony/debug-bundle": {
+            "manifest": {
+                "bundles": {
+                    "Symfony\\Bundle\\DebugBundle\\DebugBundle": [
+                        "dev"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                },
+                "conflict": {
+                    "symfony/framework-bundle": "<5.3"
+                }
+            },
+            "files": {
+                "config/packages/debug.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    if ('dev' === $containerConfigurator->env()) {",
+                        "        $containerConfigurator->extension('debug', [",
+                        "            'dump_destination' => 'tcp://%env(VAR_DUMPER_SERVER)%',",
+                        "        ]);",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "ab31adaf68a4ca980436c79a1d54d8e418da07e3"
+        }
+    }
+}

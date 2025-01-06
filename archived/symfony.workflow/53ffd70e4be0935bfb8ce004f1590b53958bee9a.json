@@ -1,0 +1,50 @@
+{
+    "manifests": {
+        "symfony/workflow": {
+            "manifest": {
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                }
+            },
+            "files": {
+                "config/packages/workflow.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->import('../workflows/**');",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/workflows/default.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use App\\Declaration\\Shared\\Domain\\Enum\\StateDeclarationEnum;",
+                        "use App\\Declaration\\Shared\\Infrastructure\\Persistence\\Doctrine\\ORM\\Entity\\Declaration;",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('framework', [",
+                        "        'workflows' => [",
+                        "",
+                        "        ],",
+                        "    ]);",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "53ffd70e4be0935bfb8ce004f1590b53958bee9a"
+        }
+    }
+}

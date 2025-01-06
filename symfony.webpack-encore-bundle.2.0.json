@@ -1,0 +1,249 @@
+{
+    "manifests": {
+        "symfony/webpack-encore-bundle": {
+            "manifest": {
+                "bundles": {
+                    "Symfony\\WebpackEncoreBundle\\WebpackEncoreBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "assets/": "assets/",
+                    "config/": "%CONFIG_DIR%/",
+                    "package.json": "package.json",
+                    "webpack.config.js": "webpack.config.js"
+                },
+                "gitignore": [
+                    "/node_modules/",
+                    "/%PUBLIC_DIR%/build/",
+                    "npm-debug.log",
+                    "yarn-error.log"
+                ],
+                "conflict": {
+                    "symfony/framework-bundle": "<5.4",
+                    "symfony/flex": "<1.20.0 || >=2.0.0,<2.3.0"
+                },
+                "add-lines": [
+                    {
+                        "file": "templates/base.html.twig",
+                        "content": "            {{ encore_entry_script_tags('app') }}",
+                        "position": "after_target",
+                        "target": "{% block javascripts %}",
+                        "warn_if_missing": true
+                    },
+                    {
+                        "file": "templates/base.html.twig",
+                        "content": "            {{ encore_entry_link_tags('app') }}",
+                        "position": "after_target",
+                        "target": "{% block stylesheets %}",
+                        "warn_if_missing": true
+                    }
+                ],
+                "docker-compose": {
+                    "compose.yaml": {
+                        "services": [
+                            "node:",
+                            "  image: node:${NODE_VERSION:-20}-slim",
+                            "  tty: true",
+                            "  working_dir: /home/node/app",
+                            "  volumes:",
+                            "    # - ./:/home/node/app"
+                        ],
+                        "volumes": [
+                            "database_data:"
+                        ]
+                    }
+                },
+                "post-install-output": [
+                    "  * Install NPM and run <fg=green>npm install</>",
+                    "",
+                    "  * Compile your assets for development: <fg=green>npm run dev</>",
+                    "",
+                    "  * Compile your assets for development and watch for any modifications: <fg=green>npm run watch</>",
+                    "",
+                    "  * Or start the development server: <fg=green>npm run dev-server</>",
+                    "",
+                    "  * Compile your assets for production: <fg=green>npm run build</>"
+                ]
+            },
+            "files": {
+                "config/packages/webpack_encore.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('webpack_encore', [",
+                        "        # The path where Encore is building the assets - i.e. Encore.setOutputPath()",
+                        "        'output_path' => '%kernel.project_dir%/public/build',",
+                        "        # If multiple builds are defined (as shown below), you can disable the default build:",
+                        "        # output_path: false",
+                        "",
+                        "        # Set attributes that will be rendered on all script and link tags",
+                        "        'script_attributes' => [",
+                        "            'defer' => true,",
+                        "            'preload' => true,",
+                        "            # Uncomment (also under link_attributes) if using Turbo Drive",
+                        "            # https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change",
+                        "            # 'data-turbo-track' => 'reload',",
+                        "        ],",
+                        "",
+                        "        # Set attributes that will be rendered on all script and link tags",
+                        "        'link_attributes' => [",
+                        "            # Uncomment if using Turbo Drive",
+                        "            # 'data-turbo-track' => 'reload',",
+                        "        ],",
+                        "",
+                        "        # If using Encore.enableIntegrityHashes() and need the crossorigin attribute (default: false, or use 'anonymous' or 'use-credentials')",
+                        "        # 'crossorigin' => 'anonymous'",
+                        "",
+                        "        # Preload all rendered script and link tags automatically via the HTTP/2 Link header",
+                        "        'preload' => true,",
+                        "",
+                        "        # Throw an exception if the entrypoints.json file is missing or an entry is missing from the data",
+                        "        'strict_mode' => true,",
+                        "",
+                        "        # If you have multiple builds:",
+                        "        #'builds' => [",
+                        "        #    'frontend' => '%kernel.project_dir%/public/assets/frontend',",
+                        "        #",
+                        "        # pass the build name as the 3rd argument to the Twig functions",
+                        "        # {{ encore_entry_script_tags('entry1', null, 'frontend') }}",
+                        "        #],",
+                        "    ]);",
+                        "",
+                        "    $containerConfigurator->extension('framework', [",
+                        "        'assets' => [",
+                        "            'json_manifest_path' => '%kernel.project_dir%/public/build/manifest.json',",
+                        "        ],",
+                        "    ]);",
+                        "",
+                        "    #if ('prod' === $containerConfigurator->env()) {",
+                        "    #    $containerConfigurator->extension('webpack_encore', [",
+                        "    #        'cache' => true,",
+                        "    #    ]);",
+                        "    #}",
+                        "",
+                        "    if ('test' === $containerConfigurator->env()) {",
+                        "        $containerConfigurator->extension('webpack_encore', [",
+                        "            'strict_mode' => false,",
+                        "        ]);",
+                        "    }",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "package.json": {
+                    "contents": [
+                        "{\r",
+                        "  \"devDependencies\": {\r",
+                        "    \"@babel/core\": \"^7.17.0\",\r",
+                        "    \"@babel/preset-env\": \"^7.16.0\",\r",
+                        "    \"@symfony/webpack-encore\": \"^5.0.0\",\r",
+                        "    \"core-js\": \"^3.38.0\",\r",
+                        "    \"regenerator-runtime\": \"^0.13.9\",\r",
+                        "    \"webpack\": \"^5.74.0\",\r",
+                        "    \"webpack-cli\": \"^5.1.0\",\r",
+                        "    \"webpack-notifier\": \"^1.15.0\"\r",
+                        "  },\r",
+                        "  \"license\": \"UNLICENSED\",\r",
+                        "  \"private\": true,\r",
+                        "  \"scripts\": {\r",
+                        "    \"dev-server\": \"encore dev-server\",\r",
+                        "    \"dev\": \"encore dev\",\r",
+                        "    \"watch\": \"encore dev --watch\",\r",
+                        "    \"build\": \"encore production --progress\"\r",
+                        "  }\r",
+                        "}\r",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "webpack.config.js": {
+                    "contents": [
+                        "const Encore = require('@symfony/webpack-encore');\r",
+                        "\r",
+                        "// Manually configure the runtime environment if not already configured yet by the \"encore\" command.\r",
+                        "// It's useful when you use tools that rely on webpack.config.js file.\r",
+                        "if (!Encore.isRuntimeEnvironmentConfigured()) {\r",
+                        "    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');\r",
+                        "}\r",
+                        "\r",
+                        "Encore\r",
+                        "    // directory where compiled assets will be stored\r",
+                        "    .setOutputPath('public/build/')\r",
+                        "    // public path used by the web server to access the output path\r",
+                        "    .setPublicPath('/build')\r",
+                        "    // only needed for CDN's or subdirectory deploy\r",
+                        "    //.setManifestKeyPrefix('build/')\r",
+                        "\r",
+                        "    /*\r",
+                        "     * ENTRY CONFIG\r",
+                        "     *\r",
+                        "     * Each entry will result in one JavaScript file (e.g. app.js)\r",
+                        "     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.\r",
+                        "     */\r",
+                        "    .addEntry('app', './assets/app.js')\r",
+                        "\r",
+                        "    // When enabled, Webpack \"splits\" your files into smaller pieces for greater optimization.\r",
+                        "    .splitEntryChunks()\r",
+                        "\r",
+                        "    // will require an extra script tag for runtime.js\r",
+                        "    // but, you probably want this, unless you're building a single-page app\r",
+                        "    .enableSingleRuntimeChunk()\r",
+                        "\r",
+                        "    /*\r",
+                        "     * FEATURE CONFIG\r",
+                        "     *\r",
+                        "     * Enable & configure other features below. For a full\r",
+                        "     * list of features, see:\r",
+                        "     * https://symfony.com/doc/current/frontend.html#adding-more-features\r",
+                        "     */\r",
+                        "    .cleanupOutputBeforeBuild()\r",
+                        "    .enableBuildNotifications()\r",
+                        "    .enableSourceMaps(!Encore.isProduction())\r",
+                        "    // enables hashed filenames (e.g. app.abc123.css)\r",
+                        "    .enableVersioning(Encore.isProduction())\r",
+                        "\r",
+                        "    // configure Babel\r",
+                        "    // .configureBabel((config) => {\r",
+                        "    //     config.plugins.push('@babel/a-babel-plugin');\r",
+                        "    // })\r",
+                        "\r",
+                        "    // enables and configure @babel/preset-env polyfills\r",
+                        "    .configureBabelPresetEnv((config) => {\r",
+                        "        config.useBuiltIns = 'usage';\r",
+                        "        config.corejs = '3.38';\r",
+                        "    })\r",
+                        "\r",
+                        "// enables Sass/SCSS support\r",
+                        "//.enableSassLoader()\r",
+                        "\r",
+                        "// uncomment if you use TypeScript\r",
+                        "//.enableTypeScriptLoader()\r",
+                        "\r",
+                        "// uncomment if you use React\r",
+                        "//.enableReactPreset()\r",
+                        "\r",
+                        "// uncomment to get integrity=\"...\" attributes on your script & link tags\r",
+                        "// requires WebpackEncoreBundle 1.4 or higher\r",
+                        "//.enableIntegrityHashes(Encore.isProduction())\r",
+                        "\r",
+                        "// uncomment if you're having problems with a jQuery plugin\r",
+                        "//.autoProvidejQuery()\r",
+                        ";\r",
+                        "\r",
+                        "module.exports = Encore.getWebpackConfig();\r",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "8a1f53694a20c78e299d35ea2b643017d970de5c"
+        }
+    }
+}

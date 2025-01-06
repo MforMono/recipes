@@ -1,0 +1,56 @@
+{
+    "manifests": {
+        "league/flysystem-bundle": {
+            "manifest": {
+                "bundles": {
+                    "League\\FlysystemBundle\\FlysystemBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/",
+                    "var/": "%VAR_DIR%/"
+                },
+                "post-install-output": [
+                    "  * <fg=blue>Configure</> your own storages in <comment>config/packages/flysystem.yaml</comment>.",
+                    "",
+                    "  * <fg=blue>Read</> the documentation at:",
+                    "    <comment>https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md</>"
+                ]
+            },
+            "files": {
+                "config/packages/flysystem.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('flysystem', [",
+                        "        'storages' => [",
+                        "            'local.storage' => [",
+                        "                'adapter' => 'local',",
+                        "                'options' => [",
+                        "                    'directory' => '%kernel.project_dir%/var/storage/default',",
+                        "                ],",
+                        "            ],",
+                        "        ],",
+                        "    ]);",
+                        "};",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "var/storage/.gitignore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "87418d4ba33d4767364aa67adf2bb62fd3dc4e27"
+        }
+    }
+}

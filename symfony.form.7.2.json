@@ -1,0 +1,43 @@
+{
+    "manifests": {
+        "symfony/form": {
+            "manifest": {
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                }
+            },
+            "files": {
+                "config/packages/csrf.php": {
+                    "contents": [
+                        "<?php\r",
+                        "\r",
+                        "declare(strict_types=1);\r",
+                        "\r",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;\r",
+                        "\r",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {\r",
+                        "    # Enable stateless CSRF protection for forms and logins/logouts\r",
+                        "    $containerConfigurator->extension('framework', [\r",
+                        "        'form' => [\r",
+                        "            'csrf_protection' => [\r",
+                        "                'token_id' => 'submit',\r",
+                        "            ],\r",
+                        "        ],\r",
+                        "        'csrf_protection' => [\r",
+                        "            'stateless_token_ids' => [\r",
+                        "                'submit',\r",
+                        "                'authenticate',\r",
+                        "                'logout'\r",
+                        "            ]\r",
+                        "        ],\r",
+                        "    ]);\r",
+                        "};\r",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "d3589db5f9fba4b278189f7a6974ee6587d32c3d"
+        }
+    }
+}

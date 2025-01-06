@@ -1,22 +1,196 @@
 {
     "aliases": {
+        "cors": "nelmio/cors-bundle",
+        "cs-fixer": "friendsofphp/php-cs-fixer",
+        "csfixer": "friendsofphp/php-cs-fixer",
+        "debug-bundle": "symfony/debug-bundle",
+        "debugbundle": "symfony/debug-bundle",
+        "encore": "symfony/webpack-encore-bundle",
+        "form": "symfony/form",
+        "foundry": "zenstruck/foundry",
         "framework-bundle": "symfony/framework-bundle",
         "frameworkbundle": "symfony/framework-bundle",
+        "jwt": "lexik/jwt-authentication-bundle",
+        "jwt-auth": "lexik/jwt-authentication-bundle",
+        "jwtauth": "lexik/jwt-authentication-bundle",
+        "log": "symfony/monolog-bundle",
+        "logger": "symfony/monolog-bundle",
+        "logging": "symfony/monolog-bundle",
+        "logs": "symfony/monolog-bundle",
+        "mail": "symfony/mailer",
+        "mailer": "symfony/mailer",
+        "messenger": "symfony/messenger",
+        "monolog": "symfony/monolog-bundle",
+        "monolog-bundle": "symfony/monolog-bundle",
+        "monologbundle": "symfony/monolog-bundle",
+        "notifier": "symfony/notifier",
+        "orm-fixtures": "doctrine/doctrine-fixtures-bundle",
+        "ormfixtures": "doctrine/doctrine-fixtures-bundle",
+        "panther": "symfony/panther",
+        "php-cs-fixer": "friendsofphp/php-cs-fixer",
+        "phpcsfixer": "friendsofphp/php-cs-fixer",
         "router": "symfony/routing",
-        "routing": "symfony/routing"
+        "routing": "symfony/routing",
+        "security": "symfony/security-bundle",
+        "security-bundle": "symfony/security-bundle",
+        "securitybundle": "symfony/security-bundle",
+        "translation": "symfony/translation",
+        "translations": "symfony/translation",
+        "translator": "symfony/translation",
+        "twig-bundle": "symfony/twig-bundle",
+        "twig-ext": "twig/extensions",
+        "twig-extensions": "twig/extensions",
+        "twig-exts": "twig/extensions",
+        "twigbundle": "symfony/twig-bundle",
+        "twigext": "twig/extensions",
+        "twigextensions": "twig/extensions",
+        "twigexts": "twig/extensions",
+        "ux": "symfony/webpack-encore-bundle",
+        "validation": "symfony/validator",
+        "validator": "symfony/validator",
+        "web-profiler-bundle": "symfony/web-profiler-bundle",
+        "webhook": "symfony/webhook",
+        "webpack": "symfony/webpack-encore-bundle",
+        "webpack-encore": "symfony/webpack-encore-bundle",
+        "webpack-encore-bundle": "symfony/webpack-encore-bundle",
+        "webpackencore": "symfony/webpack-encore-bundle",
+        "webpackencorebundle": "symfony/webpack-encore-bundle",
+        "webprofilerbundle": "symfony/web-profiler-bundle",
+        "workflow": "symfony/workflow"
     },
     "recipes": {
+        "api-platform/core": [
+            "4.0"
+        ],
+        "doctrine/doctrine-fixtures-bundle": [
+            "3.0"
+        ],
+        "friendsofphp/php-cs-fixer": [
+            "3.0"
+        ],
+        "league/flysystem-bundle": [
+            "1.0"
+        ],
+        "lexik/jwt-authentication-bundle": [
+            "2.5"
+        ],
+        "nelmio/cors-bundle": [
+            "1.5"
+        ],
+        "php-http/discovery": [
+            "1.18"
+        ],
+        "phpunit/phpunit": [
+            "9.6"
+        ],
+        "symfony/debug-bundle": [
+            "5.3"
+        ],
+        "symfony/form": [
+            "7.2"
+        ],
         "symfony/framework-bundle": [
             "7.2"
         ],
+        "symfony/mailer": [
+            "4.3"
+        ],
+        "symfony/messenger": [
+            "6.0"
+        ],
+        "symfony/monolog-bundle": [
+            "3.7"
+        ],
+        "symfony/notifier": [
+            "5.0"
+        ],
+        "symfony/panther": [
+            "1.0"
+        ],
         "symfony/routing": [
             "7.0"
+        ],
+        "symfony/security-bundle": [
+            "6.4"
+        ],
+        "symfony/translation": [
+            "6.3"
+        ],
+        "symfony/twig-bundle": [
+            "6.4"
+        ],
+        "symfony/validator": [
+            "7.0"
+        ],
+        "symfony/web-profiler-bundle": [
+            "6.1"
+        ],
+        "symfony/webhook": [
+            "6.3"
+        ],
+        "symfony/webpack-encore-bundle": [
+            "2.0"
+        ],
+        "symfony/workflow": [
+            "3.3"
+        ],
+        "twig/extensions": [
+            "1.0"
+        ],
+        "zenstruck/foundry": [
+            "2.0"
         ]
     },
     "recipe-conflicts": {
+        "symfony/debug-bundle": {
+            "5.3": {
+                "symfony/framework-bundle": "<5.3"
+            }
+        },
+        "symfony/messenger": {
+            "6.0": {
+                "symfony/framework-bundle": "<4.3"
+            }
+        },
+        "symfony/monolog-bundle": {
+            "3.7": {
+                "symfony/framework-bundle": "<5.3"
+            }
+        },
         "symfony/routing": {
             "7.0": {
                 "symfony/framework-bundle": "<7.0"
+            }
+        },
+        "symfony/security-bundle": {
+            "6.4": {
+                "symfony/framework-bundle": "<5.3"
+            }
+        },
+        "symfony/twig-bundle": {
+            "6.4": {
+                "symfony/framework-bundle": "<5.3"
+            }
+        },
+        "symfony/validator": {
+            "7.0": {
+                "symfony/framework-bundle": "<7.0"
+            }
+        },
+        "symfony/web-profiler-bundle": {
+            "6.1": {
+                "symfony/framework-bundle": "<6.1"
+            }
+        },
+        "symfony/webpack-encore-bundle": {
+            "2.0": {
+                "symfony/flex": "<1.20.0 || >=2.0.0,<2.3.0",
+                "symfony/framework-bundle": "<5.4"
+            }
+        },
+        "zenstruck/foundry": {
+            "2.0": {
+                "symfony/framework-bundle": "<5.3"
             }
         }
     },
