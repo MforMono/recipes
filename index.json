@@ -19,13 +19,7 @@
         "router": "symfony/routing",
         "routing": "symfony/routing",
         "twig-bundle": "symfony/twig-bundle",
-        "twig-ext": "twig/extensions",
-        "twig-extensions": "twig/extensions",
-        "twig-exts": "twig/extensions",
         "twigbundle": "symfony/twig-bundle",
-        "twigext": "twig/extensions",
-        "twigextensions": "twig/extensions",
-        "twigexts": "twig/extensions",
         "ux": "symfony/webpack-encore-bundle",
         "ux-twig-component": "symfony/ux-twig-component",
         "uxtwigcomponent": "symfony/ux-twig-component",
@@ -113,9 +107,6 @@
         ],
         "symplify/easy-coding-standard": [
             "12.0"
-        ],
-        "twig/extensions": [
-            "1.0"
         ],
         "vincentlanglet/twig-cs-fixer": [
             "3.0"

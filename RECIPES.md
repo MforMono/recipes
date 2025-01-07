@@ -29,6 +29,5 @@ Additional recipes can be found on the [Main Recipes Repository](https://github.
 | [symfony/webpack-encore-bundle](https://packagist.org/packages/symfony/webpack-encore-bundle) | [2.0](symfony/webpack-encore-bundle/2.0) | `encore`, `ux`, `webpack`, `webpack-encore`, `webpack-encore-bundle`, `webpackencore`, `webpackencorebundle` |
 | [symfony/workflow](https://packagist.org/packages/symfony/workflow) | [3.3](symfony/workflow/3.3) | `workflow` |
 | [symplify/easy-coding-standard](https://packagist.org/packages/symplify/easy-coding-standard) | [12.0](symplify/easy-coding-standard/12.0) |  |
-| [twig/extensions](https://packagist.org/packages/twig/extensions) | [1.0](twig/extensions/1.0) | `twig-ext`, `twig-extensions`, `twig-exts`, `twigext`, `twigextensions`, `twigexts` |
 | [vincentlanglet/twig-cs-fixer](https://packagist.org/packages/vincentlanglet/twig-cs-fixer) | [3.0](vincentlanglet/twig-cs-fixer/3.0) |  |
 | [zenstruck/foundry](https://packagist.org/packages/zenstruck/foundry) | [2.0](zenstruck/foundry/2.0) | `foundry` |
