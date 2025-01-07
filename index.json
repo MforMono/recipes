@@ -30,7 +30,7 @@
         "workflow": "symfony/workflow"
     },
     "recipes": {
-        "api-platform/core": [
+        "api-platform/symfony": [
             "4.0"
         ],
         "dg/bypass-finals": [

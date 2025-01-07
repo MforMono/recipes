@@ -4,7 +4,7 @@ Additional recipes can be found on the [Main Recipes Repository](https://github.
 
 | Package | Latest Recipe | Aliases |
 | --- | --- | --- |
-| [api-platform/core](https://packagist.org/packages/api-platform/core) | [4.0](api-platform/core/4.0) |  |
+| [api-platform/symfony](https://packagist.org/packages/api-platform/symfony) | [4.0](api-platform/symfony/4.0) |  |
 | [dg/bypass-finals](https://packagist.org/packages/dg/bypass-finals) | [1.7](dg/bypass-finals/1.7) |  |
 | [doctrine/doctrine-bundle](https://packagist.org/packages/doctrine/doctrine-bundle) | [2.13](doctrine/doctrine-bundle/2.13) |  |
 | [doctrine/doctrine-fixtures-bundle](https://packagist.org/packages/doctrine/doctrine-fixtures-bundle) | [3.0](doctrine/doctrine-fixtures-bundle/3.0) | `orm-fixtures`, `ormfixtures` |

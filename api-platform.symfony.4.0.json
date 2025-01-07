@@ -1,6 +1,6 @@
 {
     "manifests": {
-        "api-platform/core": {
+        "api-platform/symfony": {
             "manifest": {
                 "bundles": {
                     "ApiPlatform\\Symfony\\Bundle\\ApiPlatformBundle": [
@@ -13,7 +13,7 @@
                 },
                 "post-install-output": [
                     "  * Your API is almost ready:",
-                    "    1. Create your first API resource in <info>src/ApiResource</info>;",
+                    "    1. Create your first API resource in <info>src/ExempleContext/UI/Api</info>;",
                     "    2. Go to <info>/api</info> to browse your API",
                     "",
                     "  * Using MakerBundle? Try <info>php bin/console make:entity --api-resource</info>",
@@ -87,7 +87,7 @@
                     "executable": false
                 }
             },
-            "ref": "0233749efac7361b25c57563cd29cf3abd34dad3"
+            "ref": "292c91eebdc33a55562222ab54395a5f71192365"
         }
     }
 }
