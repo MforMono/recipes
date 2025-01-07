@@ -13,7 +13,6 @@ Additional recipes can be found on the [Main Recipes Repository](https://github.
 | [friends-of-behat/symfony-extension](https://packagist.org/packages/friends-of-behat/symfony-extension) | [2.0](friends-of-behat/symfony-extension/2.0) |  |
 | [friends-of-behat/variadic-extension](https://packagist.org/packages/friends-of-behat/variadic-extension) | [1.1](friends-of-behat/variadic-extension/1.1) |  |
 | [friendsofphp/php-cs-fixer](https://packagist.org/packages/friendsofphp/php-cs-fixer) | [3.0](friendsofphp/php-cs-fixer/3.0) | `cs-fixer`, `csfixer`, `php-cs-fixer`, `phpcsfixer` |
-| [lexik/jwt-authentication-bundle](https://packagist.org/packages/lexik/jwt-authentication-bundle) | [2.5](lexik/jwt-authentication-bundle/2.5) | `jwt`, `jwt-auth`, `jwtauth` |
 | [phpstan/phpstan](https://packagist.org/packages/phpstan/phpstan) | [2.0](phpstan/phpstan/2.0) |  |
 | [rector/rector](https://packagist.org/packages/rector/rector) | [2.0](rector/rector/2.0) |  |
 | [robertfausk/behat-panther-extension](https://packagist.org/packages/robertfausk/behat-panther-extension) | [1.1](robertfausk/behat-panther-extension/1.1) |  |

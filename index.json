@@ -6,9 +6,6 @@
         "foundry": "zenstruck/foundry",
         "framework-bundle": "symfony/framework-bundle",
         "frameworkbundle": "symfony/framework-bundle",
-        "jwt": "lexik/jwt-authentication-bundle",
-        "jwt-auth": "lexik/jwt-authentication-bundle",
-        "jwtauth": "lexik/jwt-authentication-bundle",
         "mail": "symfony/mailer",
         "mailer": "symfony/mailer",
         "messenger": "symfony/messenger",
@@ -59,9 +56,6 @@
         ],
         "friendsofphp/php-cs-fixer": [
             "3.0"
-        ],
-        "lexik/jwt-authentication-bundle": [
-            "2.5"
         ],
         "phpstan/phpstan": [
             "2.0"
