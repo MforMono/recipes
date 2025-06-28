@@ -8,14 +8,7 @@ TODO
 |------------------------------------|--------|-----------------------------------------------------------------------|
 | Documentation                      | :x:    | Add a README file                                                     |
 | Sylius\TwigHooks                   | :x:    | Add a recipe                                                          |
-| phpstan/extension-installer        | :x:    | Add a recipe                                                          |
-| phpstan/phpstan-doctrine           | :x:    | Add a recipe                                                          |
-| phpstan/phpstan-symfony            | :x:    | Add a recipe                                                          |
-| phpstan/phpstan-webmozart-assert   | :x:    | Add a recipe                                                          |
-| sentry/sentry-symfony              | :x:    | Handle monolog in sentry if installed                                 |
-| doctrine/doctrine-bundle           | :x:    | Configuration is invalid because of orm (require orm-pack will works) |
-| friends-of-behat/symfony-extension | :x:    | Needs to improve default recipe                                       |
-| friends-of-behat/mink-*-extension  | :x:    | Will not works without https://github.com/symfony/flex/pull/1034      |
+
 
 Symfony recipes allow the automation of Composer packages configuration via the
 `Symfony Flex`_ Composer plugin.

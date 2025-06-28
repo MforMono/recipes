@@ -8,5 +8,19 @@
         "features/": "features/",
         "tests/": "tests/"
     },
+    "add-lines": [
+        {
+            "file": ".dockerignore",
+            "content": "etc/",
+            "position": "bottom",
+            "warn_if_missing": true
+        },
+        {
+            "file": ".dockerignore",
+            "content": "features/",
+            "position": "bottom",
+            "warn_if_missing": true
+        }
+    ],
     "gitignore": ["/behat.php"]
 }

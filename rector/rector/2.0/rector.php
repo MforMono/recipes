@@ -17,8 +17,10 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_84,
+
         SetList::BEHAT_ANNOTATIONS_TO_ATTRIBUTES,
         SetList::CODE_QUALITY,
-        SymfonySetList::SYMFONY_72,
+        
+        SymfonySetList::SYMFONY_73,
     ]);
 };

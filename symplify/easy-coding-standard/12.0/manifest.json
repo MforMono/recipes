@@ -2,6 +2,14 @@
     "copy-from-recipe": {
         "ecs.php": "ecs.php"
     },
+    "add-lines": [
+        {
+            "file": ".dockerignore",
+            "content": ".ecs_cache/",
+            "position": "bottom",
+            "warn_if_missing": true
+        }
+    ],
     "gitignore": [
         "/.ecs_cache"
     ]
