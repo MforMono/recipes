@@ -1,6 +1,6 @@
 {
     "manifests": {
-        "phpstan/phpstan": {
+        "phpstan/phpstan-symfony": {
             "manifest": {
                 "copy-from-recipe": {
                     "phpstan.neon": "phpstan.neon"
@@ -9,7 +9,6 @@
                     "  * You're ready to use phpstan. Package suggestions:",
                     "    - phpstan/extension-installer",
                     "    - phpstan/phpstan-doctrine",
-                    "    - phpstan/phpstan-symfony",
                     "    - phpstan/phpstan-webmozart-assert"
                 ]
             },
@@ -105,7 +104,7 @@
                     "executable": false
                 }
             },
-            "ref": "99f889cbf0401372275dc93d537f021b8c79b100"
+            "ref": "972c870122a3e894a2471d3e5b29be18ba91e62b"
         }
     }
 }
