@@ -1,0 +1,38 @@
+services:
+
+  #######
+  # App #
+  #######
+
+  app:
+    hostname: app
+    build:
+      target: app_dev
+      args:
+        - APP_UID=${APP_UID:-1000}
+        - APP_GID=${APP_GID:-1000}
+    entrypoint: app-php-entrypoint
+    volumes:
+      - ./etc/docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/zz-app.ini:ro
+      - ./etc/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/zz-xdebug.ini:ro
+      - ./etc/docker/php/fpm.d/www.dev.conf:/usr/local/etc/php-fpm.d/zz-www.conf:ro
+      - .:/app
+    environment:
+      - XDEBUG_MODE=off
+      - XDEBUG_CLIENT_HOST=host.docker.internal
+      - XDEBUG_CLIENT_PORT=9003
+
+  app_test:
+    hostname: app_test
+    build:
+      target: app_dev
+      args:
+        - APP_UID=${APP_UID:-1000}
+        - APP_GID=${APP_GID:-1000}
+    entrypoint: app-php-entrypoint
+    volumes:
+      - ./etc/docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/zz-app.ini:ro
+      - ./etc/docker/php/fpm.d/www.dev.conf:/usr/local/etc/php-fpm.d/zz-www.conf:ro
+      - .:/app
+    environment:
+      APP_ENV: "test"

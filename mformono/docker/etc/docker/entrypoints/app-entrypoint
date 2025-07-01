@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Default command
+if [ "$#" -eq 0 ]; then
+  set -- bash
+fi
+
+# Execute the command passed to the entrypoint
+exec "$@"

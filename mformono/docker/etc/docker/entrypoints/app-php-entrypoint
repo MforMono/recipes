@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# Production
+if [ "$APP_ENV" = "prod" ]; then
+  bin/console cache:warmup
+fi
+
+# Default command
+if [ "$#" -eq 0 ]; then
+  set -- dumb-init --rewrite 15:3 php-fpm
+fi
+
+exec "$@"

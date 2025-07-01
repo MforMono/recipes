@@ -1,0 +1,24 @@
+{
+    "copy-from-recipe": {
+        ".continue/": ".continue/",
+        "etc/": "etc/",
+        ".dockerignore": ".dockerignore",
+        "compose.yaml": "compose.yaml",
+        "Dockerfile": "Dockerfile"
+    },
+    "add-lines": [
+        {
+            "file": ".editorconfig",
+            "content": [
+                "[docker-compose{,.override}.{yaml,yml}]",
+                "[compose{,.override}.yaml]",
+                "indent_size = 2"
+            ],
+            "position": "bottom",
+            "warn_if_missing": true
+        }
+    ],
+    "gitignore": [
+        "/compose.override.yaml"
+    ]
+}
