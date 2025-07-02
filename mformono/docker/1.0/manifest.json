@@ -1,8 +1,8 @@
 {
     "copy-from-recipe": {
-        ".continue/": ".continue/",
+        "continue/": ".continue/",
         "etc/": "etc/",
-        ".dockerignore": ".dockerignore",
+        "dockerignore": ".dockerignore",
         "compose.yaml": "compose.yaml",
         "Dockerfile": "Dockerfile"
     },
