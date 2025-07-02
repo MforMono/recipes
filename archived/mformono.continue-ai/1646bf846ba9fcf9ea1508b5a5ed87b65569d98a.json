@@ -1,0 +1,154 @@
+{
+    "manifests": {
+        "mformono/continue-ai": {
+            "manifest": {
+                "copy-from-recipe": {
+                    ".continue": ".continue",
+                    "docs": "docs"
+                }
+            },
+            "files": {
+                ".continue/rules/configuration-management.md": {
+                    "contents": [
+                        "---",
+                        "globs: config/**/*.yaml,config/**/*.php,.env*",
+                        "description: Guidelines for managing project configuration and secrets",
+                        "---",
+                        "",
+                        "# Configuration Management",
+                        "",
+                        "- Use .env files and environment variables to manage sensitive configurations. ",
+                        "- Never store secrets in the code. ",
+                        "- Configure services, routes, and bundles in the config/ directory."
+                    ],
+                    "executable": false
+                },
+                ".continue/rules/dependency-injection.md": {
+                    "contents": [
+                        "---",
+                        "globs: src/**/*.php,config/**/*.php",
+                        "description: Rules for managing dependencies and service configuration",
+                        "---",
+                        "",
+                        "# Dependency Injection",
+                        "",
+                        "- Use Composer to add, update, or remove PHP dependencies.",
+                        "- Systematically use Symfony's dependency injection with constructor injection. ",
+                        "- Take advantage of autowiring and autoconfiguration. Only manually configure services in config/services.php for specific cases."
+                    ],
+                    "executable": false
+                },
+                ".continue/rules/modern-php-features.md": {
+                    "contents": [
+                        "---",
+                        "globs: src/**/*.php",
+                        "description: Guidelines for using modern PHP features and strict typing",
+                        "---",
+                        "",
+                        "# Modern PHP Features",
+                        "",
+                        "- Use PHP features according to `composer.json` and php version including typed properties, constructor property promotion, attributes, etc. ",
+                        "- Always use strict typing with `declare(strict_types=1);` at the beginning of each PHP file.",
+                        "- Prefer immutability when possible."
+                    ],
+                    "executable": false
+                },
+                ".continue/rules/php-coding-standards.md": {
+                    "contents": [
+                        "---",
+                        "globs: src/**/*.php",
+                        "description: PHP coding style and naming conventions for the project",
+                        "---",
+                        "",
+                        "# PHP Coding Standards",
+                        "",
+                        "- Follow PSR-12 coding standard. ",
+                        "- Use PascalCase for classes and interfaces, camelCase for methods and variables, and UPPER_CASE_SNAKE_CASE for constants. ",
+                        "- Classes should be final by default. ",
+                        "- Use private visibility by default for properties and methods."
+                    ],
+                    "executable": false
+                },
+                ".continue/rules/symfony-project-structure.md": {
+                    "contents": [
+                        "---",
+                        "globs: src/**/*.php",
+                        "description: Rules for maintaining proper Symfony project structure following DDD principles",
+                        "---",
+                        "",
+                        "# Symfony Project Structure",
+                        "",
+                        "- Organize code by business contexts following DDD/Hexagonal Architecture. ",
+                        "- Never create Controller/, Entity/, Repository/ directories at the root of src/. ",
+                        "- Always organize code within context directories (e.g., src/UserContext/, src/BillingContext/) with layers: Application/, Domain/, Infrastructure/, and UI/."
+                    ],
+                    "executable": false
+                },
+                ".continue/rules/testing-structure.md": {
+                    "contents": [
+                        "---",
+                        "globs: tests/**/*.php",
+                        "description: Guidelines for organizing and writing tests",
+                        "---",
+                        "",
+                        "# Testing Structure",
+                        "",
+                        "- Tests should be in the tests/ directory at the root of the project. ",
+                        "- The structure of tests/ should mirror that of src/. ",
+                        "- Use PHPUnit for testing."
+                    ],
+                    "executable": false
+                },
+                "docs/agent/.gitignore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                },
+                "docs/ai-agent-best-practices.md": {
+                    "contents": [
+                        "# AI Agent Best Practices",
+                        "",
+                        "This document outlines best practices for using AI agents to automate software development tasks. Following these guidelines will help ensure that the agent's actions are predictable, effective, and aligned with your project's goals.",
+                        "",
+                        "## The Two-Step Approach: Suggestion and Implementation",
+                        "",
+                        "To maximize the effectiveness of AI agents, we recommend a two-step approach that separates the \"thinking\" from the \"doing.\" This involves using two different types of AI models for each step:",
+                        "",
+                        "1. **Suggestion Phase (Reasoning Model)**: Use a powerful reasoning model, such as **Gemini 2.5 Pro**, to analyze the problem, understand the context, and propose a high-level plan. This model excels at understanding complex requirements and breaking them down into smaller, manageable steps.",
+                        "2. **Implementation Phase (Coding Model)**: Once you have a plan, use a specialized coding model, such as **Claude 3.7 Sonnet**, to implement the changes. These models are optimized for generating high-quality, idiomatic code and are well-suited for the more mechanical task of writing code.",
+                        "",
+                        "### Why Use This Approach?",
+                        "",
+                        "- **Better Control**: By separating the planning from the implementation, you have more control over the agent's actions. You can review and approve the plan before any code is written, which reduces the risk of unintended consequences.",
+                        "- **Higher Quality Results**: Using the right tool for the job leads to better results. Reasoning models are better at high-level planning, while coding models are better at writing code.",
+                        "- **Easier Debugging**: If something goes wrong, it's easier to identify the source of the problem. If the plan was flawed, you know that the reasoning model needs to be adjusted. If the implementation was incorrect, you know that the coding model needs to be corrected.",
+                        "",
+                        "## Practical Workflow",
+                        "",
+                        "1. **Define the Task**: Clearly define the task you want the agent to perform. The more specific you are, the better the results will be.",
+                        "",
+                        "2. **Request a Suggestion**: Ask the reasoning model to propose a plan for completing the task. For example, you could say:",
+                        "",
+                        "    > \"I want to add a new feature that allows users to export their data as a CSV file. Please provide a step-by-step plan for implementing this feature.\"",
+                        "",
+                        "3. **Review the Plan**: Carefully review the plan proposed by the reasoning model. Make sure that it is complete, correct, and aligned with your project's conventions.",
+                        "",
+                        "4. **Request Implementation**: Once you are satisfied with the plan, ask the coding model to implement it. You can provide the plan as context to the coding model. For example, you could say:",
+                        "",
+                        "    > \"Please implement the following plan:",
+                        "    > 1. Create a new route `/export` that accepts a `GET` request.",
+                        "    > 2. In the controller for this route, fetch the user's data from the database.",
+                        "    > 3. Convert the data to a CSV format.",
+                        "    > 4. Return the CSV data as a downloadable file.\"",
+                        "",
+                        "5. **Verify the Changes**: After the coding model has implemented the changes, verify that they are correct and that they meet your requirements. This may involve running tests, linting the code, and manually testing the new feature.",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "1646bf846ba9fcf9ea1508b5a5ed87b65569d98a"
+        }
+    }
+}
