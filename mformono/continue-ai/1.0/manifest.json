@@ -1,0 +1,6 @@
+{
+    "copy-from-recipe": {
+        "continue/": ".continue/",
+	"docs/": "docs/"
+    }
+}
