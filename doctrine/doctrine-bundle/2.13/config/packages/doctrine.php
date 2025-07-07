@@ -32,8 +32,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'Example' => [
                     'is_bundle' => false,
                     'type' => 'attribute',
-                    'dir' => '%kernel.project_dir%/src/ExampleContext/Shared/Infrastructure/Persistence/Doctrine/ORM/Entity',
-                    'prefix' => 'App\ExampleContext\Shared\Infrastructure\Persistence\Doctrine\ORM\Entity',
+                    'dir' => '%kernel.project_dir%/src/ExampleContext/Infrastructure/Persistence/Doctrine/ORM/Entity',
+                    'prefix' => 'App\ExampleContext\Infrastructure\Persistence\Doctrine\ORM\Entity',
                     'alias' => 'Example',
                 ],
             ],
