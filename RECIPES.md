@@ -21,6 +21,8 @@ Additional recipes can be found on the [Main Recipes Repository](https://github.
 | [robertfausk/behat-panther-extension](https://packagist.org/packages/robertfausk/behat-panther-extension) | [1.1](robertfausk/behat-panther-extension/1.1) |  |
 | [sentry/sentry-symfony](https://packagist.org/packages/sentry/sentry-symfony) | [4.6](sentry/sentry-symfony/4.6) |  |
 | [spaze/phpstan-disallowed-calls](https://packagist.org/packages/spaze/phpstan-disallowed-calls) | [4.0](spaze/phpstan-disallowed-calls/4.0) |  |
+| [sylius/bootstrap-admin-ui](https://packagist.org/packages/sylius/bootstrap-admin-ui) | [0.4](sylius/bootstrap-admin-ui/0.4) |  |
+| [sylius/resource-bundle](https://packagist.org/packages/sylius/resource-bundle) | [1.12](sylius/resource-bundle/1.12) |  |
 | [symfony/framework-bundle](https://packagist.org/packages/symfony/framework-bundle) | [7.2](symfony/framework-bundle/7.2) | `framework-bundle`, `frameworkbundle` |
 | [symfony/mailer](https://packagist.org/packages/symfony/mailer) | [4.3](symfony/mailer/4.3) | `mail`, `mailer` |
 | [symfony/messenger](https://packagist.org/packages/symfony/messenger) | [6.0](symfony/messenger/6.0) | `messenger` |

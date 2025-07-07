@@ -81,6 +81,12 @@
         "spaze/phpstan-disallowed-calls": [
             "4.0"
         ],
+        "sylius/bootstrap-admin-ui": [
+            "0.4"
+        ],
+        "sylius/resource-bundle": [
+            "1.12"
+        ],
         "symfony/framework-bundle": [
             "7.2"
         ],

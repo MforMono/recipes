@@ -1,0 +1,66 @@
+{
+    "manifests": {
+        "sylius/resource-bundle": {
+            "manifest": {
+                "container": {
+                    "locale": "en"
+                },
+                "bundles": {
+                    "Sylius\\Bundle\\ResourceBundle\\SyliusResourceBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/",
+                    "src/": "%SRC_DIR%/"
+                }
+            },
+            "files": {
+                "ExampleContext/UI/Resource/.gitignore": {
+                    "contents": [
+                        ""
+                    ],
+                    "executable": false
+                },
+                "config/packages/sylius_resource.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator;",
+                        "",
+                        "return static function (ContainerConfigurator $containerConfigurator): void {",
+                        "    $containerConfigurator->extension('sylius_resource', [",
+                        "        'mapping' => [",
+                        "            'paths' => [",
+                        "                '%kernel.project_dir%/src/ExampleContext/UI/Resource',",
+                        "            ],",
+                        "        ],",
+                        "        'resources' => null,",
+                        "    ]);",
+                        "};"
+                    ],
+                    "executable": false
+                },
+                "config/routes/sylius_resource.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "use Symfony\\Component\\Routing\\Loader\\Configurator\\RoutingConfigurator;",
+                        "",
+                        "return static function (RoutingConfigurator $routingConfigurator): void {",
+                        "    $routingConfigurator->import('sylius.routing.loader.crud_routes_attributes', 'service');",
+                        "",
+                        "    $routingConfigurator->import('sylius.routing.loader.routes_attributes', 'service');",
+                        "};"
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "41927063b80d46574d3a5bdb89c888efa22c298c"
+        }
+    }
+}
