@@ -1,0 +1,6 @@
+<bg=blue;fg=white>                                                     </>
+<bg=blue;fg=white> How to finish your bootstrap admin ui configuration </>
+<bg=blue;fg=white>                                                     </>
+
+  * <fg=blue>Run command</> console importmap:require tom-select/dist/css/tom-select.default.css</>
+  * <fg=blue>Read</> the documentation at <comment>https://stack.sylius.com/</>
