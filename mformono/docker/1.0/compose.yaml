@@ -21,7 +21,9 @@ services:
       - XDEBUG_MODE=off
       - XDEBUG_CLIENT_HOST=host.docker.internal
       - XDEBUG_CLIENT_PORT=9003
-
+    ports:
+      - "80:8000"
+      
   app_test:
     hostname: app_test
     build:
