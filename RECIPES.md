@@ -15,6 +15,7 @@ Additional recipes can be found on the [Main Recipes Repository](https://github.
 | [friendsofphp/php-cs-fixer](https://packagist.org/packages/friendsofphp/php-cs-fixer) | [3.0](friendsofphp/php-cs-fixer/3.0) | `cs-fixer`, `csfixer`, `php-cs-fixer`, `phpcsfixer` |
 | [mformono/continue-ai](https://packagist.org/packages/mformono/continue-ai) | [1.0](mformono/continue-ai/1.0) |  |
 | [mformono/docker](https://packagist.org/packages/mformono/docker) | [1.0](mformono/docker/1.0) |  |
+| [mformono/editorconfig](https://packagist.org/packages/mformono/editorconfig) | [1.0](mformono/editorconfig/1.0) |  |
 | [phpstan/phpstan-symfony](https://packagist.org/packages/phpstan/phpstan-symfony) | [2.0](phpstan/phpstan-symfony/2.0) |  |
 | [rector/rector](https://packagist.org/packages/rector/rector) | [2.0](rector/rector/2.0) |  |
 | [robertfausk/behat-panther-extension](https://packagist.org/packages/robertfausk/behat-panther-extension) | [1.1](robertfausk/behat-panther-extension/1.1) |  |
