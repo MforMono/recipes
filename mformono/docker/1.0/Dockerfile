@@ -58,7 +58,6 @@ apt-get install --quiet --yes --no-install-recommends --verbose-versions \
     dumb-init \
     git \
     nodejs \
-    npm \
     sudo \
     wget \
     zip \
