@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Rector\Set\ValueObject\SetList;
 use Rector\Config\RectorConfig;
+use Rector\Set\ValueObject\SetList;
 
 return RectorConfig::configure()
     ->withParallel()
     ->withPaths([
         __DIR__ . '/src',
-        __DIR__ . '/tests'
+        __DIR__ . '/tests',
     ])
     ->withPhpSets()
     ->withComposerBased(
@@ -19,8 +19,21 @@ return RectorConfig::configure()
         phpunit: true
     )
     ->withAttributesSets()
-    ->withPreparedSets()
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        doctrineCodeQuality: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        strictBooleans: true,
+        phpunitCodeQuality: true,
+        rectorPreset: true,
+        symfonyCodeQuality: true,
+        symfonyConfigs: true,
+        typeDeclarations: true
+    )
     ->withSets([
         SetList::BEHAT_ANNOTATIONS_TO_ATTRIBUTES,
     ]);
-
