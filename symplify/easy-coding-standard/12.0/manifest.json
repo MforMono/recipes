@@ -7,7 +7,7 @@
             "file": ".dockerignore",
             "content": ".ecs_cache/",
             "position": "bottom",
-            "warn_if_missing": true
+            "warn_if_missing": false
         }
     ],
     "gitignore": [

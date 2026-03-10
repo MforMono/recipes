@@ -1,0 +1,122 @@
+name: upgrade-recipes
+version: "2.1.0"
+description: >
+  Compare local Symfony recipes against schranz-php-recipes upstream
+  and upgrade missing versions with local customizations applied.
+
+inputs:
+  - name: dry_run
+    type: string
+    default: false
+    required: false
+    description: Preview changes without applying them
+
+  - name: skip_compare
+    type: string
+    default: false
+    required: false
+    description: Skip the upstream comparison phase
+
+  - name: keep_tmp
+    type: string
+    default: false
+    required: false
+    description: Preserve temporary files for debugging
+
+states:
+  initial: init
+
+  # --- Phase 0: Setup report directory ---
+  init:
+    type: step
+    command: |
+      report_dir=".upgrade-report/$(date +%Y-%m-%d_%H%M%S)"
+      mkdir -p "$report_dir"
+      echo -n "$report_dir"
+    on_success: compare_check
+
+  # --- Phase 1: Decide whether to compare ---
+  compare_check:
+    type: step
+    command: |
+      [[ "{{.inputs.skip_compare}}" == "true" ]] && echo " SKIP" || echo " RUN"
+    transitions:
+      - when: 'states.compare_check.Output contains "SKIP"'
+        goto: download_upstream
+      - goto: compare
+
+  compare:
+    type: step
+    command: .awf/scripts/compare-upstream.sh
+    timeout: 300
+    on_success: download_upstream
+    on_failure: download_upstream
+    continue_on_error: true
+
+  # --- Phase 2: Shallow clone upstream repos (main + contrib) ---
+  download_upstream:
+    type: step
+    command: |
+      cache_dir=$(mktemp -d)
+      tmp_main=$(mktemp -d)
+      tmp_contrib=$(mktemp -d)
+      git clone --depth 1 --quiet "https://github.com/schranz-php-recipes/symfony-recipes-php.git" "$tmp_main"
+      git clone --depth 1 --quiet "https://github.com/schranz-php-recipes/symfony-recipes-php-contrib.git" "$tmp_contrib"
+      # Merge: contrib first (lower priority), then main overwrites
+      find "$tmp_contrib" -mindepth 1 -maxdepth 1 -not -name '.git' -exec cp -a {} "$cache_dir/" \;
+      find "$tmp_main" -mindepth 1 -maxdepth 1 -not -name '.git' -exec cp -a {} "$cache_dir/" \;
+      rm -rf "$tmp_main" "$tmp_contrib"
+      echo -n "$cache_dir"
+    timeout: 180
+    on_success: collect_packages
+    on_failure: {message: "Failed to clone upstream repos", status: 1}
+
+  # --- Phase 3: Discover local packages ---
+  collect_packages:
+    type: step
+    command: .awf/scripts/collect-packages.sh
+    timeout: 30
+    on_success: upgrade_loop
+    on_failure: {message: "Failed to collect packages: {{.states.collect_packages.Stderr}}", status: 1}
+
+  # --- Phase 4: Upgrade each package ---
+  upgrade_loop:
+    type: for_each
+    items: "{{.states.collect_packages.Output}}"
+    body:
+      - upgrade_package
+    on_complete: generate_report
+
+  upgrade_package:
+    type: step
+    command: |
+      args=("{{.loop.Item}}" --report-dir "{{.states.init.Output}}" --upstream-cache "{{.states.download_upstream.Output}}")
+      [[ "{{.inputs.dry_run}}" == "true" ]] && args+=("--dry-run")
+      [[ "{{.inputs.keep_tmp}}" == "true" ]] && args+=("--keep-tmp")
+      .awf/scripts/upgrade-recipe.sh "${args[@]}"
+    timeout: 300
+    continue_on_error: true
+    on_success: upgrade_loop
+
+  # --- Phase 5: Generate consolidated report ---
+  generate_report:
+    type: step
+    command: .awf/scripts/generate-report.sh "{{.states.init.Output}}"
+    timeout: 30
+    on_success: cleanup
+    on_failure: cleanup
+    continue_on_error: true
+
+  # --- Phase 6: Cleanup upstream cache ---
+  cleanup:
+    type: step
+    command: |
+      [[ "{{.inputs.keep_tmp}}" != "true" ]] && rm -rf "{{.states.download_upstream.Output}}" 2>/dev/null
+      echo "done"
+    on_success: done
+    on_failure: done
+    continue_on_error: true
+
+  done:
+    type: terminal
+    status: success
